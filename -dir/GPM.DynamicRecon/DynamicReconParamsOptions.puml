@@ -1,0 +1,13 @@
+@startuml
+class DynamicReconParamsOptions {
+    - initialKF : float = 5.6f
+    - initialKSI : float = 1.6f
+    - inputVoltageCSV : string = @"D:\Cameca\R73_03003 Voltage History.csv"
+    - outputParameterData : string = @"D:\Cameca\Parameters_Evolution.dat"
+    + InitialKF : float <<get>> <<set>>
+    + InitialKSI : float <<get>> <<set>>
+    + InputVoltageCSV : string <<get>> <<set>>
+    + OutputParameterData : string <<get>> <<set>>
+}
+BindableBase <|-- DynamicReconParamsOptions
+@enduml

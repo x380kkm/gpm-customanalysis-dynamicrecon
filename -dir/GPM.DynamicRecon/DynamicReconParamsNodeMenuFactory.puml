@@ -1,0 +1,10 @@
+@startuml
+class DynamicReconParamsNodeMenuFactory {
+    + <<const>> UniqueId : string = "GPM.CustomAnalysis.DynamicRecon.DynamicReconParamsNodeMenuFactory"
+    - <<readonly>> _eventAggregator : IEventAggregator
+    + DynamicReconParamsNodeMenuFactory(eventAggregator:IEventAggregator)
+    + CreateMenuItem(context:IAnalysisMenuContext) : IMenuItem
+    + Location : AnalysisMenuLocation <<get>>
+}
+IAnalysisMenuFactory <|-- DynamicReconParamsNodeMenuFactory
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class DynamicReconModule {
+    + RegisterTypes(containerRegistry:IContainerRegistry) : void
+    + OnInitialized(containerProvider:IContainerProvider) : void
+}
+IModule <|-- DynamicReconModule
+@enduml

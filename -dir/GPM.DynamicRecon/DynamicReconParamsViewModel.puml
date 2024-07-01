@@ -1,0 +1,19 @@
+@startuml
+class DynamicReconParamsViewModel {
+    + <<const>> UniqueId : string = "GPM.CustomAnalysis.DynamicRecon.DynamicReconParamsViewModel"
+    - <<readonly>> renderDataFactory : IRenderDataFactory
+    - optionsChanged : bool = false
+    - <<readonly>> runCommand : AsyncRelayCommand
+    + RunCommand : ICommand <<get>>
+    + Options : DynamicReconParamsOptions <<get>>
+    + Tabs : ObservableCollection<object> <<get>>
+    - selectedTab : object?
+    + SelectedTab : object? <<get>> <<set>>
+    + DynamicReconParamsViewModel(services:IAnalysisViewModelBaseServices, renderDataFactory:IRenderDataFactory)
+    # <<override>> OnCreated(eventArgs:ViewModelCreatedEventArgs) : void
+    - <<async>> OnRun() : Task
+    - OptionsOnPropertyChanged(sender:object?, e:PropertyChangedEventArgs) : void
+    - UpdateSelectedEventCountsEnabled() : bool
+}
+"AnalysisViewModelBase`1" "<DynamicReconParamsNode>" <|-- DynamicReconParamsViewModel
+@enduml

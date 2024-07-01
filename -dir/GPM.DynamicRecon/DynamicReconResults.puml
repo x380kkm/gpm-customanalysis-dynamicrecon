@@ -1,0 +1,9 @@
+@startuml
+class DynamicReconResults {
+    + Voltage : Vector3[] <<get>> <<init>>
+    + FieldFactor : Vector3[] <<get>> <<init>>
+    + ICF : Vector3[] <<get>> <<init>>
+    + NormalizedFieldFactor : Vector3[] <<get>> <<init>>
+    + NormalizedICF : Vector3[] <<get>> <<init>>
+}
+@enduml

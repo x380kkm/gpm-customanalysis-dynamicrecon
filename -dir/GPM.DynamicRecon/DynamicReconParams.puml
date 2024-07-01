@@ -1,0 +1,11 @@
+@startuml
+class DynamicReconParams {
+    + Run(ionData:IIonData, options:DynamicReconParamsOptions) : DynamicReconResults?
+    + {static} LambertW(x:double) : double
+}
+struct stcData {
+    + Nat : int
+    + V : double
+}
+DynamicReconParams +-- stcData
+@enduml

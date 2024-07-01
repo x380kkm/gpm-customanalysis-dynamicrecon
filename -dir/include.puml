@@ -1,0 +1,16 @@
+@startuml
+!include .\\GPM.DynamicRecon\Chart2DContentViewModel.puml
+!include .\\GPM.DynamicRecon\DynamicReconModule.puml
+!include .\\GPM.DynamicRecon\DynamicReconParams.puml
+!include .\\GPM.DynamicRecon\DynamicReconParamsNode.puml
+!include .\\GPM.DynamicRecon\DynamicReconParamsNodeMenuFactory.puml
+!include .\\GPM.DynamicRecon\DynamicReconParamsOptions.puml
+!include .\\GPM.DynamicRecon\DynamicReconParamsView.xaml.puml
+!include .\\GPM.DynamicRecon\DynamicReconParamsViewModel.puml
+!include .\\GPM.DynamicRecon\DynamicReconResults.puml
+!include .\\GPM.DynamicRecon\Properties\AssemblyInfo.puml
+!include .\\GPM.DynamicRecon\obj\x64\Debug\.NETCoreApp,Version=v6.0.AssemblyAttributes.puml
+!include .\\GPM.DynamicRecon\obj\x64\Debug\DynamicReconParamsView.g.puml
+!include .\\GPM.DynamicRecon\obj\x64\Debug\GeneratedInternalTypeHelper.g.puml
+!include .\\GPM.DynamicRecon\obj\x64\Debug\GPM.DynamicRecon.AssemblyInfo.puml
+@enduml
