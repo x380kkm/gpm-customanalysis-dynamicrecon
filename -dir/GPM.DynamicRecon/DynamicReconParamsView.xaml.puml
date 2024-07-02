@@ -1,5 +1,0 @@
-@startuml
-class DynamicReconParamsView <<partial>> {
-    + DynamicReconParamsView()
-}
-@enduml

@@ -1,0 +1,99 @@
+@startuml
+
+class Chart2DContentViewModel {
+    + Title : string <<get>>
+    + AxisXLabel : string <<get>>
+    + AxisYLabel : string <<get>>
+    + RenderData : ICollection<IRenderData> <<get>>
+    + Chart2DContentViewModel(title:string, axisXLabel:string, axisYLabel:string, content:IEnumerable<IRenderData>)
+    + Dispose() : void
+}
+IDisposable <|-- Chart2DContentViewModel
+
+class DynamicReconModule {
+    + RegisterTypes(containerRegistry:IContainerRegistry) : void
+    + OnInitialized(containerProvider:IContainerProvider) : void
+}
+IModule <|-- DynamicReconModule
+
+class DynamicReconParams {
+    + Run(ionData:IIonData, options:DynamicReconParamsOptions) : DynamicReconResults?
+    + {static} LambertW(x:double) : double
+}
+struct stcData {
+    + Nat : int
+    + V : double
+}
+DynamicReconParams +-- stcData
+
+class DynamicReconParamsNode {
+    + {static} DisplayInfo : NodeDisplayInfo <<get>>
+    + <<const>> UniqueId : string = "GPM.CustomAnalysis.DynamicRecon.DynamicReconParamsNode"
+    - <<readonly>> dynamicReconParam : DynamicReconParams
+    + Options : DynamicReconParamsOptions <<get>>
+    + DynamicReconParamsNode(services:IAnalysisNodeBaseServices)
+    + <<async>> Run() : Task<DynamicReconResults?>
+    # <<override>> GetSaveContent() : byte[]?
+    # <<override>> OnCreated(eventArgs:NodeCreatedEventArgs) : void
+    - OptionsOnPropertyChanged(sender:object?, e:PropertyChangedEventArgs) : void
+}
+class NodeDisplayInfo {
+    + Title : string <<get>> = "GPM Dynamic Recon Params"
+    + Icon : ImageSource? <<get>> = null
+}
+AnalysisNodeBase <|-- DynamicReconParamsNode
+DynamicReconParamsNode +-- NodeDisplayInfo
+INodeDisplayInfo <|-- NodeDisplayInfo
+
+class DynamicReconParamsNodeMenuFactory {
+    + <<const>> UniqueId : string = "GPM.CustomAnalysis.DynamicRecon.DynamicReconParamsNodeMenuFactory"
+    - <<readonly>> _eventAggregator : IEventAggregator
+    + DynamicReconParamsNodeMenuFactory(eventAggregator:IEventAggregator)
+    + CreateMenuItem(context:IAnalysisMenuContext) : IMenuItem
+    + Location : AnalysisMenuLocation <<get>>
+}
+IAnalysisMenuFactory <|-- DynamicReconParamsNodeMenuFactory
+
+class DynamicReconParamsOptions {
+    - initialKF : float = 5.6f
+    - initialKSI : float = 1.6f
+    - inputVoltageCSV : string = @"D:\Cameca\R73_03003 Voltage History.csv"
+    - outputParameterData : string = @"D:\Cameca\Parameters_Evolution.dat"
+    + InitialKF : float <<get>> <<set>>
+    + InitialKSI : float <<get>> <<set>>
+    + InputVoltageCSV : string <<get>> <<set>>
+    + OutputParameterData : string <<get>> <<set>>
+}
+BindableBase <|-- DynamicReconParamsOptions
+
+class DynamicReconParamsView <<partial>> {
+    + DynamicReconParamsView()
+}
+
+class DynamicReconParamsViewModel {
+    + <<const>> UniqueId : string = "GPM.CustomAnalysis.DynamicRecon.DynamicReconParamsViewModel"
+    - <<readonly>> renderDataFactory : IRenderDataFactory
+    - optionsChanged : bool = false
+    - <<readonly>> runCommand : AsyncRelayCommand
+    + RunCommand : ICommand <<get>>
+    + Options : DynamicReconParamsOptions <<get>>
+    + Tabs : ObservableCollection<object> <<get>>
+    - selectedTab : object?
+    + SelectedTab : object? <<get>> <<set>>
+    + DynamicReconParamsViewModel(services:IAnalysisViewModelBaseServices, renderDataFactory:IRenderDataFactory)
+    # <<override>> OnCreated(eventArgs:ViewModelCreatedEventArgs) : void
+    - <<async>> OnRun() : Task
+    - OptionsOnPropertyChanged(sender:object?, e:PropertyChangedEventArgs) : void
+    - UpdateSelectedEventCountsEnabled() : bool
+}
+"AnalysisViewModelBase`1" "<DynamicReconParamsNode>" <|-- DynamicReconParamsViewModel
+
+class DynamicReconResults {
+    + Voltage : Vector3[] <<get>> <<init>>
+    + FieldFactor : Vector3[] <<get>> <<init>>
+    + ICF : Vector3[] <<get>> <<init>>
+    + NormalizedFieldFactor : Vector3[] <<get>> <<init>>
+    + NormalizedICF : Vector3[] <<get>> <<init>>
+}
+
+@enduml
