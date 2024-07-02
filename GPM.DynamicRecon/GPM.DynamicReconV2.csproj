@@ -6,15 +6,15 @@
 		<Platforms>x64</Platforms>
 		<Nullable>enable</Nullable>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<RootNamespace>GPM.CustomAnalysis.DynamicRecon</RootNamespace>
-		<AssemblyName>GPM.CustomAnalysis.DynamicRecon</AssemblyName>
+		<RootNamespace>GPM.CustomAnalysis.DynamicReconV2</RootNamespace>
+		<AssemblyName>GPM.CustomAnalysis.DynamicReconV2</AssemblyName>
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<RuntimeIdentifier>win10-x64</RuntimeIdentifier>
 		<SelfContained>false</SelfContained>
 	</PropertyGroup>
 
 	<PropertyGroup Label="Package">
-		<Title>GPM.CustomAnalysis.DynamicRecon</Title>
+		<Title>GPM.CustomAnalysis.DynamicReconV2</Title>
 		<Authors>Groupe de Physique des Matériaux,CAMECA Instruments Inc.</Authors>
 		<Company>CAMECA Instruments, Inc.</Company>
 		<Product>AP Suite</Product>

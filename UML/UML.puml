@@ -10,29 +10,29 @@ class Chart2DContentViewModel {
 }
 IDisposable <|-- Chart2DContentViewModel
 
-class DynamicReconModule {
+class DynamicReconV2Module {
     + RegisterTypes(containerRegistry:IContainerRegistry) : void
     + OnInitialized(containerProvider:IContainerProvider) : void
 }
-IModule <|-- DynamicReconModule
+IModule <|-- DynamicReconV2Module
 
-class DynamicReconParams {
-    + Run(ionData:IIonData, options:DynamicReconParamsOptions) : DynamicReconResults?
+class DynamicReconV2Params {
+    + Run(ionData:IIonData, options:DynamicReconV2ParamsOptions) : DynamicReconV2Results?
     + {static} LambertW(x:double) : double
 }
 struct stcData {
     + Nat : int
     + V : double
 }
-DynamicReconParams +-- stcData
+DynamicReconV2Params +-- stcData
 
-class DynamicReconParamsNode {
+class DynamicReconV2ParamsNode {
     + {static} DisplayInfo : NodeDisplayInfo <<get>>
-    + <<const>> UniqueId : string = "GPM.CustomAnalysis.DynamicRecon.DynamicReconParamsNode"
-    - <<readonly>> dynamicReconParam : DynamicReconParams
-    + Options : DynamicReconParamsOptions <<get>>
-    + DynamicReconParamsNode(services:IAnalysisNodeBaseServices)
-    + <<async>> Run() : Task<DynamicReconResults?>
+    + <<const>> UniqueId : string = "GPM.CustomAnalysis.DynamicReconV2.DynamicReconV2ParamsNode"
+    - <<readonly>> dynamicReconV2Param : DynamicReconV2Params
+    + Options : DynamicReconV2ParamsOptions <<get>>
+    + DynamicReconV2ParamsNode(services:IAnalysisNodeBaseServices)
+    + <<async>> Run() : Task<DynamicReconV2Results?>
     # <<override>> GetSaveContent() : byte[]?
     # <<override>> OnCreated(eventArgs:NodeCreatedEventArgs) : void
     - OptionsOnPropertyChanged(sender:object?, e:PropertyChangedEventArgs) : void
@@ -41,20 +41,20 @@ class NodeDisplayInfo {
     + Title : string <<get>> = "GPM Dynamic Recon Params"
     + Icon : ImageSource? <<get>> = null
 }
-AnalysisNodeBase <|-- DynamicReconParamsNode
-DynamicReconParamsNode +-- NodeDisplayInfo
+AnalysisNodeBase <|-- DynamicReconV2ParamsNode
+DynamicReconV2ParamsNode +-- NodeDisplayInfo
 INodeDisplayInfo <|-- NodeDisplayInfo
 
-class DynamicReconParamsNodeMenuFactory {
-    + <<const>> UniqueId : string = "GPM.CustomAnalysis.DynamicRecon.DynamicReconParamsNodeMenuFactory"
+class DynamicReconV2ParamsNodeMenuFactory {
+    + <<const>> UniqueId : string = "GPM.CustomAnalysis.DynamicReconV2.DynamicReconV2ParamsNodeMenuFactory"
     - <<readonly>> _eventAggregator : IEventAggregator
-    + DynamicReconParamsNodeMenuFactory(eventAggregator:IEventAggregator)
+    + DynamicReconV2ParamsNodeMenuFactory(eventAggregator:IEventAggregator)
     + CreateMenuItem(context:IAnalysisMenuContext) : IMenuItem
     + Location : AnalysisMenuLocation <<get>>
 }
-IAnalysisMenuFactory <|-- DynamicReconParamsNodeMenuFactory
+IAnalysisMenuFactory <|-- DynamicReconV2ParamsNodeMenuFactory
 
-class DynamicReconParamsOptions {
+class DynamicReconV2ParamsOptions {
     - initialKF : float = 5.6f
     - initialKSI : float = 1.6f
     - inputVoltageCSV : string = @"D:\Cameca\R73_03003 Voltage History.csv"
@@ -64,31 +64,31 @@ class DynamicReconParamsOptions {
     + InputVoltageCSV : string <<get>> <<set>>
     + OutputParameterData : string <<get>> <<set>>
 }
-BindableBase <|-- DynamicReconParamsOptions
+BindableBase <|-- DynamicReconV2ParamsOptions
 
-class DynamicReconParamsView <<partial>> {
-    + DynamicReconParamsView()
+class DynamicReconV2ParamsView <<partial>> {
+    + DynamicReconV2ParamsView()
 }
 
-class DynamicReconParamsViewModel {
-    + <<const>> UniqueId : string = "GPM.CustomAnalysis.DynamicRecon.DynamicReconParamsViewModel"
+class DynamicReconV2ParamsViewModel {
+    + <<const>> UniqueId : string = "GPM.CustomAnalysis.DynamicReconV2.DynamicReconV2ParamsViewModel"
     - <<readonly>> renderDataFactory : IRenderDataFactory
     - optionsChanged : bool = false
     - <<readonly>> runCommand : AsyncRelayCommand
     + RunCommand : ICommand <<get>>
-    + Options : DynamicReconParamsOptions <<get>>
+    + Options : DynamicReconV2ParamsOptions <<get>>
     + Tabs : ObservableCollection<object> <<get>>
     - selectedTab : object?
     + SelectedTab : object? <<get>> <<set>>
-    + DynamicReconParamsViewModel(services:IAnalysisViewModelBaseServices, renderDataFactory:IRenderDataFactory)
+    + DynamicReconV2ParamsViewModel(services:IAnalysisViewModelBaseServices, renderDataFactory:IRenderDataFactory)
     # <<override>> OnCreated(eventArgs:ViewModelCreatedEventArgs) : void
     - <<async>> OnRun() : Task
     - OptionsOnPropertyChanged(sender:object?, e:PropertyChangedEventArgs) : void
     - UpdateSelectedEventCountsEnabled() : bool
 }
-"AnalysisViewModelBase`1" "<DynamicReconParamsNode>" <|-- DynamicReconParamsViewModel
+"AnalysisViewModelBase`1" "<DynamicReconV2ParamsNode>" <|-- DynamicReconV2ParamsViewModel
 
-class DynamicReconResults {
+class DynamicReconV2Results {
     + Voltage : Vector3[] <<get>> <<init>>
     + FieldFactor : Vector3[] <<get>> <<init>>
     + ICF : Vector3[] <<get>> <<init>>

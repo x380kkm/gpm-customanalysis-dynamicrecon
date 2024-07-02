@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cameca.CustomAnalysis.Interface;
 
-namespace GPM.CustomAnalysis.DynamicRecon;
+namespace GPM.CustomAnalysis.DynamicReconV2;
 
 internal class Chart2DContentViewModel : IDisposable
 {

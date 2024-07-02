@@ -7,10 +7,10 @@ using System.Xml.Serialization;
 using Cameca.CustomAnalysis.Interface;
 using Cameca.CustomAnalysis.Utilities;
 
-namespace GPM.CustomAnalysis.DynamicRecon;
+namespace GPM.CustomAnalysis.DynamicReconV2;
 
-[DefaultView(DynamicReconParamsViewModel.UniqueId, typeof(DynamicReconParamsViewModel))]
-internal class DynamicReconParamsNode : AnalysisNodeBase
+[DefaultView(DynamicReconV2ParamsViewModel.UniqueId, typeof(DynamicReconV2ParamsViewModel))]
+internal class DynamicReconV2ParamsNode : AnalysisNodeBase
 {
 	public class NodeDisplayInfo : INodeDisplayInfo
 	{
@@ -22,26 +22,26 @@ internal class DynamicReconParamsNode : AnalysisNodeBase
 
 	public const string UniqueId = "GPM.CustomAnalysis.DynamicRecon.DynamicReconParamsNode";
 
-	private readonly DynamicReconParams dynamicReconParam;
+	private readonly DynamicReconV2Params dynamicReconV2Param;
 
-	public DynamicReconParamsOptions Options { get; private set; } = new();
+	public DynamicReconV2ParamsOptions Options { get; private set; } = new();
 
-	public DynamicReconParamsNode(IAnalysisNodeBaseServices services) : base(services)
+	public DynamicReconV2ParamsNode(IAnalysisNodeBaseServices services) : base(services)
 	{
-		dynamicReconParam = new DynamicReconParams();
+		dynamicReconV2Param = new DynamicReconV2Params();
 	}
 
-	public async Task<DynamicReconResults?> Run()
+	public async Task<DynamicReconV2Results?> Run()
 	{
 		if (await Services.IonDataProvider.GetIonData(InstanceId) is not { } ionData)
 			return null;
 
-		return dynamicReconParam.Run(ionData, Options);
+		return dynamicReconV2Param.Run(ionData, Options);
 	}
 
 	protected override byte[]? GetSaveContent()
 	{
-		var serializer = new XmlSerializer(typeof(DynamicReconParamsOptions));
+		var serializer = new XmlSerializer(typeof(DynamicReconV2ParamsOptions));
 		using var stringWriter = new StringWriter();
 		serializer.Serialize(stringWriter, Options);
 		return Encoding.UTF8.GetBytes(stringWriter.ToString());
@@ -55,9 +55,9 @@ internal class DynamicReconParamsNode : AnalysisNodeBase
         if (eventArgs.Trigger == EventTrigger.Load && eventArgs.Data is { } data)
         {
             var xmlData = Encoding.UTF8.GetString(data);
-            var serializer = new XmlSerializer(typeof(DynamicReconParamsOptions));
+            var serializer = new XmlSerializer(typeof(DynamicReconV2ParamsOptions));
             using var stringReader = new StringReader(xmlData);
-            if (serializer.Deserialize(stringReader) is DynamicReconParamsOptions loadedOptions)
+            if (serializer.Deserialize(stringReader) is DynamicReconV2ParamsOptions loadedOptions)
             {
                 Options = loadedOptions;
             }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Numerics;
 
-namespace GPM.CustomAnalysis.DynamicRecon;
+namespace GPM.CustomAnalysis.DynamicReconV2;
 
-internal class DynamicReconResults
+internal class DynamicReconV2Results
 {
 	public Vector3[] Voltage { get; init; } = Array.Empty<Vector3>();
 	public Vector3[] FieldFactor { get; init; } = Array.Empty<Vector3>();

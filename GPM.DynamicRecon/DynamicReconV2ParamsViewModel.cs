@@ -9,11 +9,11 @@ using Cameca.CustomAnalysis.Interface;
 using Cameca.CustomAnalysis.Utilities;
 using CommunityToolkit.Mvvm.Input;
 
-namespace GPM.CustomAnalysis.DynamicRecon;
+namespace GPM.CustomAnalysis.DynamicReconV2;
 
-internal class DynamicReconParamsViewModel : AnalysisViewModelBase<DynamicReconParamsNode>
+internal class DynamicReconV2ParamsViewModel : AnalysisViewModelBase<DynamicReconV2ParamsNode>
 {
-	public const string UniqueId = "GPM.CustomAnalysis.DynamicRecon.DynamicReconParamsViewModel";
+	public const string UniqueId = "GPM.CustomAnalysis.DynamicReconV2.DynamicReconV2ParamsViewModel";
 
 
 	private readonly IRenderDataFactory renderDataFactory;
@@ -22,7 +22,7 @@ internal class DynamicReconParamsViewModel : AnalysisViewModelBase<DynamicReconP
 	private readonly AsyncRelayCommand runCommand;
 	public ICommand RunCommand => runCommand;
 
-	public DynamicReconParamsOptions Options => Node!.Options;
+	public DynamicReconV2ParamsOptions Options => Node!.Options;
 
 	public ObservableCollection<object> Tabs { get; } = new();
 
@@ -33,7 +33,7 @@ internal class DynamicReconParamsViewModel : AnalysisViewModelBase<DynamicReconP
 		set => SetProperty(ref selectedTab, value);
 	}
 
-	public DynamicReconParamsViewModel(IAnalysisViewModelBaseServices services,
+	public DynamicReconV2ParamsViewModel(IAnalysisViewModelBaseServices services,
 		IRenderDataFactory renderDataFactory) : base(services)
 	{
 		this.renderDataFactory = renderDataFactory;

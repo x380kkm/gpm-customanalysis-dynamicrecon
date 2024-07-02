@@ -6,12 +6,12 @@ using System.Numerics;
 using System.Threading;
 using Cameca.CustomAnalysis.Interface;
 
-namespace GPM.CustomAnalysis.DynamicRecon;
+namespace GPM.CustomAnalysis.DynamicReconV2;
 
-internal class DynamicReconParams
+internal class DynamicReconV2Params
 {
 
-	public DynamicReconResults? Run(IIonData ionData, DynamicReconParamsOptions options)
+	public DynamicReconV2Results? Run(IIonData ionData, DynamicReconV2ParamsOptions options)
 	{
 
 		// Initial parameters : Field factor and ICF (ksi)
@@ -120,7 +120,7 @@ internal class DynamicReconParams
 			ICFN[i] = (float)(ksi_N[i]);
 		}
 
-		return new DynamicReconResults
+		return new DynamicReconV2Results
 		{
 			Voltage = natDat.Zip(Voltage).Select(x => new Vector3(x.First, 0f, x.Second)).ToArray(),
 			FieldFactor = natDat.Zip(Field_Factor).Select(x => new Vector3(x.First, 0f, x.Second)).ToArray(),

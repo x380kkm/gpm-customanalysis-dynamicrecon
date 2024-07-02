@@ -1,8 +1,8 @@
 ﻿using Prism.Mvvm;
 
-namespace GPM.CustomAnalysis.DynamicRecon;
+namespace GPM.CustomAnalysis.DynamicReconV2;
 
-public class DynamicReconParamsOptions : BindableBase
+public class DynamicReconV2ParamsOptions : BindableBase
 {
 	private float initialKF = 5.6f;
 	private float initialKSI = 1.6f;
