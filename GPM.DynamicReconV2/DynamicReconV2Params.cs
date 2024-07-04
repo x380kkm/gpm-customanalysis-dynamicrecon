@@ -17,6 +17,7 @@ internal class DynamicReconV2Params
 		// Initial parameters : Field factor and ICF (ksi)
 		double kf0 = options.InitialKF;     // Field factor
 		double ksi0 = options.InitialKSI;   // ICF
+		double firstV = options.FirstV;     // First voltage
 
 		// Conversion FR-US
 		Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
@@ -69,7 +70,7 @@ internal class DynamicReconV2Params
 		double omega = LambertW(1);
 		for (int i = 0; i < Data.Count(); i++)
 		{
-			Vratio[i] = Data[0].V / Data[i].V;
+			Vratio[i] = firstV / Data[i].V;
 			Lu[i] = Math.Exp(omega) / (Math.Exp(LambertW(Vratio[i])) - Math.Log(Vratio[i]));
 			kf[i] = kf0 * Lu[i];
 			ksi[i] = ksi0 * Math.Pow(kf[i] / kf0, (1.0 / 3.0));

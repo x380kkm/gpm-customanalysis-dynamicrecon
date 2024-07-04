@@ -6,7 +6,7 @@ public class DynamicReconV2ParamsOptions : BindableBase
 {
 	private float initialKF = 5.6f;
 	private float initialKSI = 1.6f;
-
+	private float firstV = 1.6f;
 	private string inputVoltageCSV = @"D:\Cameca\R73_03003 Voltage History.csv";
 	private string outputParameterData = @"D:\Cameca\Parameters_Evolution.dat";
 
@@ -21,7 +21,11 @@ public class DynamicReconV2ParamsOptions : BindableBase
 		get => initialKSI;
 		set => SetProperty(ref initialKSI, value);
 	}
-
+		public float FirstV
+	{
+		get => firstV;
+		set => SetProperty(ref firstV, value);
+	}
 	public string InputVoltageCSV
 	{
 		get => inputVoltageCSV;
